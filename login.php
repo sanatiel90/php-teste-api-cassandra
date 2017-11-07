@@ -16,6 +16,14 @@
 </button> </div>
 
   <?php  } ?>
+
+   <?php if (isset($_GET['logout'])){ ?>         
+       <div class="alert alert-info text-center"> <strong>Deslogado do sistema</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button> </div>
+
+  <?php  } ?>
+
   
   <?php if (isset($_GET['user_not_created'])){ ?>         
        <div class="alert alert-danger text-center"> <strong> Não foi possível criar usuário!</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">

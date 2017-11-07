@@ -1,4 +1,12 @@
 <?php
+require_once 'config.php';
+
+session_start();
+
+
+if(!isset($_SESSION['token'])){
+	header("location: http://localhost:8080/login.php");
+}
 
 $data = [
 		  "token"=> $_SESSION['token'],
@@ -22,7 +30,10 @@ $result = json_decode($response,true);
 
 
 if($result['status'] == '201'){
-	header("location: http://localhost:8080/list.php?contact_created");
+	//se cadastro ok, chamar func q pega todos os contatos do usuario cadastrado
+	request_list_users();
+	
+	header("location: http://localhost:8080/index.php?contact_created");
 }else{
 	header("location: http://localhost:8080/index.php?contact_not_created");
 }

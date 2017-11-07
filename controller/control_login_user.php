@@ -1,5 +1,7 @@
 <?php
 
+require_once 'config.php';
+
 $data = [ "login"=> $_POST['login'], "password"=> $_POST['password'] ];
 
 $url = "http://localhost:3000/api/login";
@@ -22,10 +24,13 @@ if($result->status == '200'){
 	$_SESSION['token'] = $result->token; 	
 	$_SESSION['user'] = $result->usuario; 	
 
+	//se login ok, chamar func q pega todos os contatos do usuario cadastrado
+	request_list_users();
+
 	header("location: http://localhost:8080/index.php");
 
 }else{
-	header("location: http://localhost:8080/login.php?login_error?");
+	header("location: http://localhost:8080/login.php?login_error");
 }
 
 
