@@ -10,6 +10,15 @@ if(isset($_SESSION['contacts'])){
   $result = $_SESSION['contacts'];  
 }
 
+$contacts = false;
+
+if(isset($result)){
+    if(count($result->contatos) > 0){
+      $contacts = true;
+    }
+  }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +44,20 @@ if(isset($_SESSION['contacts'])){
 
   <?php if (isset($_GET['contact_not_created'])){ ?>         
        <div class="alert alert-info text-center"> <strong> Não foi possível criar o contato</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button> </div>
+
+ <?php  } ?>
+
+   <?php if (isset($_GET['contact_deleted'])){ ?>         
+       <div class="alert alert-info text-center"> <strong> Contato deletado com sucesso</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button> </div>
+
+ <?php  } ?>
+
+   <?php if (isset($_GET['contact_not_deleted'])){ ?>         
+       <div class="alert alert-info text-center"> <strong> Não foi possível deletar o contato</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button> </div>
 
@@ -76,21 +99,21 @@ if(isset($_SESSION['contacts'])){
                              <tbody>
                                 <?php        
 
-                                   if(isset($result)){
+                                   if($contacts == true){
                                         
                                    for ($i=0; $i < count($result->contatos); $i++) { 
                                      
                                  ?>
                                   <tr> 
-                                   <td class="text-center" ><?php echo $result->contatos[$i]->cont_name ?></td> 
-                                   <td class="text-center" ><?php echo $result->contatos[$i]->cont_tel ?></td> 
-                                   <td class="text-center" ><label>deletar</label></td>
+                                   <td class="text-center" ><?php echo $result->contatos[$i]->cont_name; ?></td> 
+                                   <td class="text-center" ><?php echo $result->contatos[$i]->cont_tel; ?></td> 
+                                   <td class="text-center" ><label><a class="btn btn-sm btn-danger glyphicon glyphicon-trash" href="controller/control_del_contact.php?name=<?php echo $result->contatos[$i]->cont_name;  ?>"></a></label></td>
                                   </tr>
 
                                
                                   <?php  } }else{  ?> 
                                     <tr> 
-                                     <td class="text-center" >Você ainda não possui contatos cadastrados</td> 
+                                     <td class="text-center" >Você não possui contatos cadastrados</td> 
                                      
                                     </tr>
 

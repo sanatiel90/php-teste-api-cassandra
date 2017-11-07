@@ -1,11 +1,5 @@
 <?php
 
-session_start();
-
-if(!isset($_SESSION['token'])){
-	header("location: http://localhost:8080/login.php");
-}
-
 // func q faz requisicao para pegar todos contatos do user logado 
 function request_list_users(){
 
@@ -19,9 +13,6 @@ function request_list_users(){
 	$_SESSION['contacts'] = $res;	
 
 }
-
-
-
 
 
 
